@@ -1,4 +1,6 @@
+import allure
 import pytest
+from allure_commons.types import Severity
 from selene import browser, be, have, query, by
 from selene.core.command import js, select_all, __select_all_actions
 import os
@@ -11,8 +13,12 @@ from pages.registration_form import RegistrationPage
 
 registration_page = RegistrationPage()
 user=Users('Alexey', "Ostrovskiy", "a.a.ostrovskiy@mail.ru", "Male", "8911277596", 30, "May",
-           1992, "Computer Science", "Music", "resources/me.jpg", "Дачный проспект", "NCR", "Gurgaon")
-
+           1992, "Computer Science", "Music", "me.jpg", "Дачный проспект", "NCR", "Gurgaon")
+@allure.label("owner", "Ostrovskiy Alexey")
+@allure.severity(Severity.CRITICAL)
+@allure.story("Checking registration")
+@allure.feature("new tasks")
+@allure.link("https://demoqa.com", name="Testing")
 def test_student_registrate(open):
     # registration_page.fill_first_name()
     # registration_page.fill_last_name()
@@ -23,13 +29,13 @@ def test_student_registrate(open):
     # registration_page.fill_date_by_your_own(30, "May", 1992)
     # registration_page.fill_subject()
     # registration_page.fill_hobby()
-    # registration_page.dowload_file()
+    # registration_page.download_file()
     # registration_page.fill_address()
     # registration_page.fill_state()
     # registration_page.fill_city()
-    registration_page.register(user)
-    registration_page.submit()
-    registration_page.should_have_registered("Alexey", "Ostrovskiy", "a.a.ostrovskiy@mail.ru",
-                                             "Male", "8911277596", "30 May,1992", "Computer Science",
-                                             "Music", "me.jpg", "Дачный проспект",
-                                             "NCR", "Gurgaon")
+    with allure.step("registration"):
+        registration_page.register(user)
+    with allure.step("submit"):
+        registration_page.submit()
+    with allure.step("assertion"):
+        registration_page.should_be_registered(user)

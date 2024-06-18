@@ -4,6 +4,7 @@ from selene import browser, be, have
 from selene.core.command import js, select_all
 import tests
 from data.user import Users
+import allure
 
 
 #
@@ -66,10 +67,10 @@ class RegistrationPage:
         browser.all(".custom-checkbox").element_by(have.text(hobby)).click()
     # reading = browser.element('[id="hobbies-checkbox-2"]').should(be.present)
     # reading.perform(command=js.click)
-    def dowload_file(self, name = "resources/me.jpg"):
+    def download_file(self, name = "me.jpg"):
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
-                os.path.join(os.path.dirname(tests.__file__), name)
+                os.path.join(os.path.dirname(tests.__file__), f'resources/{name}')
             )
         )
     def fill_address(self, address="Дачный проспект"):
@@ -113,8 +114,11 @@ class RegistrationPage:
         self.fill_date_by_your_own(user.date_by_your_own_day, user.date_by_your_own_month, user.date_by_your_own_year)
         self.fill_subject(user.subject)
         self.fill_hobby(user.hobby)
-        self.dowload_file(user.name_of_file)
+        self.download_file(user.name_of_file)
         self.fill_address(user.address)
         self.fill_state(user.state)
         self.fill_city(user.city)
-
+    def should_be_registered(self, user: Users):
+        date_of_birth = f"{user.date_by_your_own_day} {user.date_by_your_own_month},{user.date_by_your_own_year}"
+        self.should_have_registered(user.first_name, user.last_name, user.email, user.gender, user.mobile_number, date_of_birth, user.subject,
+                                    user.hobby, user.name_of_file, user.address, user.state, user.city)
