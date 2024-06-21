@@ -18,7 +18,7 @@ class RegistrationPage:
     def __init__(self):
         pass
 
-    def open(self):
+    def open(self,):
         browser.open("/automation-practice-form")
 
     def fill_first_name(self, first_name='Alexey'):
