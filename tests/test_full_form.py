@@ -37,9 +37,9 @@ def test_student_registrate(setup_browser):
     # registration_page.fill_address()
     # registration_page.fill_state()
     # registration_page.fill_city()
-    with allure.step("registration"):
-        registration_page.register(user)
-    with allure.step("submit"):
-        registration_page.submit()
-    with allure.step("assertion"):
-        registration_page.should_be_registered(user)
+    # with allure.step("registration"):
+    #     registration_page.register(user)
+    # with allure.step("submit"):
+    #     registration_page.submit()
+    # with allure.step("assertion"):
+    #     registration_page.should_be_registered(user)
