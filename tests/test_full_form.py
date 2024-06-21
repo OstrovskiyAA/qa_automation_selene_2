@@ -21,7 +21,9 @@ user=Users('Alexey', "Ostrovskiy", "a.a.ostrovskiy@mail.ru", "Male", "8911277596
 @allure.link("https://demoqa.com", name="Testing")
 
 
-def test_student_registrate(open):
+def test_student_registrate(setup_browser):
+    browser = setup_browser
+    browser.open('https://demoqa.com/automation-practice-form')
     # registration_page.fill_first_name()
     # registration_page.fill_last_name()
     # registration_page.fill_email()

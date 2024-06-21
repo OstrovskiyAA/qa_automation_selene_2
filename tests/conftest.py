@@ -42,6 +42,6 @@ def setup_browser(request):
     # attach.add_video(browser)
 
     browser.quit()
-@pytest.fixture(scope="function")
-def open(setup_browser):
-    browser.open('https://demoqa.com/automation-practice-form')
+# @pytest.fixture(scope="function")
+# def open(setup_browser):
+#     browser.open('https://demoqa.com/automation-practice-form')
