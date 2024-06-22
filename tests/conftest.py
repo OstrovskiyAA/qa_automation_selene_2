@@ -1,6 +1,5 @@
 # import allure
 # import pytest
-from selene import browser, be, have, Config, Browser
 
 # from selenium import webdriver
 # from selenium.webdriver.chrome.options import Options
@@ -38,6 +37,7 @@ def setup_browser(request):
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_html(browser)
+    attach.add_video()
     browser.quit()
 
 # если без селеноида:

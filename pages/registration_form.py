@@ -70,7 +70,7 @@ class RegistrationPage():
     def download_file(self, name = "me.jpg"):
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
-                os.path.join(os.path.dirname(qa_automation_selene_high_level_steps.__file__), f'resources/{name}')
+                os.path.join(os.path.dirname(__file__), f'resources/{name}')
             )
         )
     def fill_address(self, address="Дачный проспект"):

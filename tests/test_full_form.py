@@ -43,7 +43,7 @@ def test_student_registrate(setup_browser):
         music.perform(command=js.click)
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
-                os.path.join(os.path.dirname(qa_automation_selene_high_level_steps.__file__), f'resources/{user.name_of_file}')
+                os.path.join(os.path.dirname(__file__), f'resources/{user.name_of_file}')
             )
         )
         browser.element('[id="currentAddress"]').should(be.blank).type(user.address)
