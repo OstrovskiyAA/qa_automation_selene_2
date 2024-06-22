@@ -70,9 +70,9 @@ class RegistrationPage():
         browser.element("#subjectsInput").type(subject).press_enter()
 
     def fill_hobby(self, hobby="Music"):
-        browser.all(".custom-checkbox").element_by(have.text(hobby)).click()
-    # reading = browser.element('[id="hobbies-checkbox-2"]').should(be.present)
-    # reading.perform(command=js.click)
+        # browser.all(".custom-checkbox").element_by(have.text(hobby)).click()
+        music = browser.element('[id="hobbies-checkbox-3"]').should(be.present)
+        music.perform(command=js.click)
     def download_file(self, name = "me.jpg"):
         browser.element("#uploadPicture").set_value(
             os.path.abspath(

@@ -43,7 +43,8 @@ def test_student_registrate(setup_browser):
             command=select_all
         ).type(f"{user.date_by_your_own_day} {user.date_by_your_own_month} {user.date_by_your_own_year}").press_enter()
         browser.element("#subjectsInput").type(user.subject).press_enter()
-        browser.all(".custom-checkbox").element_by(have.text(user.hobby)).click()
+        music = browser.element('[id="hobbies-checkbox-3"]').should(be.present)
+        music.perform(command=js.click)
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
                 os.path.join(os.path.dirname(tests.__file__), f'resources/{user.name_of_file}')
