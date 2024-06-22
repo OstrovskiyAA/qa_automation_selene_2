@@ -38,6 +38,7 @@ def setup_browser(request):
     attach.add_logs(browser)
     attach.add_html(browser)
     attach.add_video(browser)
+    # https://selenoid.autotests.cloud/video/6b3ce7bab6ee7af8fccfa466115ca4f9.mp4 - готовое видео
     browser.quit()
 
 # если без селеноида:
