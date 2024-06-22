@@ -2,14 +2,8 @@ import os
 
 from selene import browser, be, have
 from selene.core.command import js, select_all
-import tests
 from data.user import Users
-import allure
-import pytest
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selene import Browser, Config
 
 # from tests.conftest import setup_browser
 
@@ -76,7 +70,7 @@ class RegistrationPage():
     def download_file(self, name = "me.jpg"):
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
-                os.path.join(os.path.dirname(tests.__file__), f'resources/{name}')
+                os.path.join(os.path.dirname(qa_automation_selene_high_level_steps.__file__), f'resources/{name}')
             )
         )
     def fill_address(self, address="Дачный проспект"):

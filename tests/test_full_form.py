@@ -1,12 +1,8 @@
 import allure
-import pytest
 from allure_commons.types import Severity
-from selene import browser, be, have, query, by
-from selene.core.command import js, select_all, __select_all_actions
+from selene import be, have
+from selene.core.command import js, select_all
 import os
-from selenium import webdriver
-
-import tests
 
 from data.user import Users
 from pages.registration_form import RegistrationPage
@@ -47,7 +43,7 @@ def test_student_registrate(setup_browser):
         music.perform(command=js.click)
         browser.element("#uploadPicture").set_value(
             os.path.abspath(
-                os.path.join(os.path.dirname(tests.__file__), f'resources/{user.name_of_file}')
+                os.path.join(os.path.dirname(qa_automation_selene_high_level_steps.__file__), f'resources/{user.name_of_file}')
             )
         )
         browser.element('[id="currentAddress"]').should(be.blank).type(user.address)
