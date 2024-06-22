@@ -39,6 +39,7 @@ def setup_browser(request):
     attach.add_html(browser)
     attach.add_video(browser)
     # https://selenoid.autotests.cloud/video/6b3ce7bab6ee7af8fccfa466115ca4f9.mp4 - готовое видео
+    # https://jenkins.autotests.cloud/job/qa_quru_python_9_jenkins/22/allure/#suites/f4bdba275bf1cb59aa6c3a1a478ebf14/2982fd04dcfed1f7/ - отчет
     browser.quit()
 
 # если без селеноида:
