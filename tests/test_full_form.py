@@ -20,10 +20,64 @@ user=Users('Alexey', "Ostrovskiy", "a.a.ostrovskiy@mail.ru", "Male", "8911277596
 @allure.feature("new tasks")
 @allure.link("https://demoqa.com", name="Testing")
 
+#Если без селеноида:
+# def test_student_registrate(open):
 
+# Если нужен селеноид:
 def test_student_registrate(setup_browser):
     browser = setup_browser
     browser.open('https://demoqa.com/automation-practice-form')
+    with allure.step("registration"):
+        browser.element("[id=firstName]").should(be.blank).type(user.first_name)
+        browser.element("#lastName").should(be.blank).perform(
+            command=js.set_value(user.last_name)
+        )
+        browser.element("[id=userEmail]").should(be.blank).type(
+            user.email
+        )
+        browser.all("[name=gender]").element_by(have.value(user.gender)).element("..").click()
+        browser.all("[id^=userNumb]")[2].should(be.blank).with_(
+            set_value_by_js=True
+        ).set_value(user.mobile_number)
+        browser.element('[id="dateOfBirthInput"]').should(be.visible).perform(
+            command=select_all
+        ).type(f"{user.date_by_your_own_day} {user.date_by_your_own_month} {user.date_by_your_own_year}").press_enter()
+        browser.element("#subjectsInput").type(user.subject).press_enter()
+        browser.all(".custom-checkbox").element_by(have.text(user.hobby)).click()
+        browser.element("#uploadPicture").set_value(
+            os.path.abspath(
+                os.path.join(os.path.dirname(tests.__file__), f'resources/{user.name_of_file}')
+            )
+        )
+        browser.element('[id="currentAddress"]').should(be.blank).type(user.address)
+        browser.element("#state").perform(command=js.scroll_into_view).click()
+        browser.all("[id^=react-select][id*=option]").element_by(
+            have.exact_text(user.state)
+        ).click()
+        browser.element(".css-1wa3eu0-placeholder").should(be.present).should(
+            have.text("Select City")
+        ).click()
+        browser.all("[id^=react-select][id*=option]").element_by(
+            have.exact_text(user.city)
+        ).click()
+    with allure.step("submit"):
+        browser.element('[id = "submit"]').should(be.present).perform(command=js.click)
+    with allure.step("assertion"):
+        date_of_birth = f"{user.date_by_your_own_day} {user.date_by_your_own_month},{user.date_by_your_own_year}"
+        browser.element(".table").all("td").even.should(
+            have.exact_texts(
+                f"{user.first_name} {user.last_name}",
+                user.email,
+                user.gender,
+                user.mobile_number,
+                date_of_birth,
+                user.subject,
+                user.hobby,
+                user.name_of_file,
+                user.address,
+                f"{user.state} {user.city}",
+            )
+        )
     # registration_page.fill_first_name()
     # registration_page.fill_last_name()
     # registration_page.fill_email()

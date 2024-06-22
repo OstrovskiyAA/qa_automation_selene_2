@@ -1,9 +1,7 @@
 # import allure
 # import pytest
-# from selene import browser, be, have, Config, Browser
-# @pytest.fixture(scope="function")
-# def open():
-#     browser.open('https://demoqa.com/automation-practice-form')
+from selene import browser, be, have, Config, Browser
+
 # from selenium import webdriver
 # from selenium.webdriver.chrome.options import Options
 
@@ -15,7 +13,7 @@ from selene import Browser, Config
 
 
 # from utils import attach
-
+# Если нужен селеноид:
 @pytest.fixture(scope='function')
 def setup_browser(request):
     options = Options()
@@ -32,16 +30,11 @@ def setup_browser(request):
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
-
     browser = Browser(Config(driver=driver))
     yield browser
-
-    # attach.add_screenshot(browser)
-    # attach.add_logs(browser)
-    # attach.add_html(browser)
-    # attach.add_video(browser)
-
     browser.quit()
+
+# если без селеноида:
 # @pytest.fixture(scope="function")
-# def open(setup_browser):
+# def open():
 #     browser.open('https://demoqa.com/automation-practice-form')

@@ -5,7 +5,13 @@ from selene.core.command import js, select_all
 import tests
 from data.user import Users
 import allure
+import pytest
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selene import Browser, Config
+
+# from tests.conftest import setup_browser
 
 #
 # class RegistrationForm():
@@ -14,12 +20,12 @@ import allure
 #     def last_name(self):
 #         browser.element('[id=lastName]').type('skdjkdksd')
 
-class RegistrationPage:
+
+class RegistrationPage():
     def __init__(self):
         pass
-
-    def open(self,):
-        browser.open("/automation-practice-form")
+    # def open(self):
+    #     browser.open("/automation-practice-form")
 
     def fill_first_name(self, first_name='Alexey'):
         browser.element("[id=firstName]").should(be.blank).type(first_name)
@@ -40,10 +46,10 @@ class RegistrationPage:
         # male.perform(command=js.click)
         # browser.element("[name=gender][value=Male]").click()
 
-    def fill_mobile_number(self, mobile_nimber="8911277596"):
+    def fill_mobile_number(self, mobile_number="8911277596"):
         browser.all("[id^=userNumb]")[2].should(be.blank).with_(
             set_value_by_js=True
-        ).set_value(mobile_nimber)
+        ).set_value(mobile_number)
 
     def fill_date(self, day=30, month=5, year=1992):
         browser.element('[id="dateOfBirthInput"]').should(be.visible).click()
